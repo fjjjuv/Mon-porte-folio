@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LCS Studios | Julien - Full Stack Developer</title>
+    <!-- Chargement de Tailwind avec fallback -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=Fira+Code:wght@400;500&display=swap');
+        
+        :root {
+            --cyan: #00D1FF;
+            --bg: #050505;
+            --card: rgba(20, 20, 20, 0.9);
+            --border: rgba(0, 209, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: #ffffff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Fond avec grille dynamique */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 1px 1px, rgba(0, 209, 255, 0.1) 1px, transparent 0);
+            background-size: 40px 40px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        #progress-bar {
+            position: fixed;
+            top: 0; left: 0; height: 3px;
+            background: var(--cyan);
+            z-index: 10000;
+            width: 0%;
+        }
+
+        .glass-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 25px rgba(0, 209, 255, 0.15);
+        }
+
+        /* Animation de chargement/révélation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .badge {
+            background: rgba(0, 209, 255, 0.1);
+            color: var(--cyan);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 1px solid rgba(0, 209, 255, 0.2);
+        }
+
+        .snake-container {
+            background: #0d1117;
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid #30363d;
+            min-height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Fallback si image vide */
+        img:not([src]) {
+            visibility: hidden;
+        }
+
+        @media (max-width: 640px) {
+            .hero-title { font-size: 2.5rem !important; }
+        }
+.image-render-pixel {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+    </style>
+</head>
+<body>
+
+    <div id="progress-bar"></div>
+    <div class="grid-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-[100] p-4">
+        <div class="max-w-6xl mx-auto glass-card px-6 py-4 flex justify-between items-center shadow-xl">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center font-black text-black">L</div>
+                <div class="flex flex-col">
+                    <span class="font-black text-xs tracking-tight uppercase">LCS STUDIOS</span>
+                    <span class="text-[8px] text-cyan-400 font-bold">DIRECTEUR EXÉCUTIF</span>
+                </div>
+            </div>
+            <a href="https://github.com/fjjjuv" target="_blank" class="text-cyan-400 text-xl hover:scale-110 transition">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center px-6 pt-20 text-center">
+        <div class="reveal mb-8">
+            <!-- Typing SVG fallback avec texte si échec -->
+            <img src="https://readme-typing-svg.herokuapp.com?font=Inter&weight=700&size=45&pause=1000&color=00D1FF&center=true&vCenter=true&width=600&height=100&lines=JULIEN+(fjjjuv)" alt="JULIEN (fjjjuv)" class="mx-auto">
+        </div>
+
+        <div class="reveal flex flex-wrap justify-center gap-3 mb-12">
+            <span class="badge">Full Stack</span>
+            <span class="badge">Bac-Pro CIEL</span>
+            <span class="badge">Autodidacte</span>
+        </div>
+
+        <div class="reveal flex flex-col sm:flex-row gap-4">
+            <a href="#profil" class="bg-cyan-500 text-black px-10 py-4 rounded-xl font-black uppercase text-xs tracking-widest hover:bg-cyan-400 transition-all">
+                Mon Profil
+            </a>
+            <a href="mailto:fjjjuv@proton.me" class="glass-card px-10 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest hover:bg-white/5 transition-all">
+                Me contacter
+            </a>
+        </div>
+    </section>
+
+    <!-- Section Profil -->
+    <section id="profil" class="py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="glass-card p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center reveal">
+                <div class="flex-1">
+                    <h2 class="text-3xl font-black uppercase mb-6 flex items-center gap-3">
+                        <span class="w-8 h-1 bg-cyan-500"></span> 👤 MON PROFIL
+                    </h2>
+                    <p class="text-slate-400 leading-relaxed text-sm md:text-base mb-6">
+                        Développeur Full Stack et explorateur tech de <span id="age" class="text-cyan-400 font-bold">16</span> ans. Je combine ma formation en Bac-pro CIEL avec une passion pour l'automatisation et le code propre.
+                    </p>
+                    <div class="grid grid-cols-1 gap-4 text-xs">
+                        <div class="flex items-center gap-3"><i class="fas fa-bolt text-cyan-400"></i> <span>Recherche de solutions sécurisées</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-rocket text-cyan-400"></i> <span>Optimisation UI/UX & Web</span></div>
+                        <div class="flex items-center gap-3"><i class="fas fa-microchip text-cyan-400"></i> <span>IA & Automatisation</span></div>
+                    </div>
+                </div>
+                <div class="w-full md:w-64 shrink-0">
+                    <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Coding" class="rounded-xl border border-cyan-400/20 w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stack Technique -->
+    <section class="py-24 px-6 bg-white/[0.01]">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="reveal text-center text-xs font-bold tracking-[0.5em] text-cyan-400 uppercase mb-16 italic italic">🛠️ TECH_STACK</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Frontend -->
+                <div class="reveal glass-card p-6">
+                    <h3 class="font-bold text-sm mb-6 uppercase text-slate-300">Frontend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <img src="https://img.shields.io/badge/JS-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JS">
+                        <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React">
+                        <img src="https://img.shields.io/badge/TS-3178C6?style=flat&logo=typescript&logoColor=white" alt="TS">
+                    </div>
+                </div>
+                <!-- Backend -->
+                <div class="reveal glass-card p-6">
+                    <h3 class="font-bold text-sm mb-6 uppercase text-slate-300">Backend</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
+                        <img src="https://img.shields.io/badge/Node-339933?style=flat&logo=node.js&logoColor=white" alt="Node">
+                        <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker">
+                    </div>
+                </div>
+                <!-- Tools -->
+                <div class="reveal glass-card p-6">
+                    <h3 class="font-bold text-sm mb-6 uppercase text-slate-300">Environnement</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux">
+                        <img src="https://img.shields.io/badge/CIEL-00D1FF?style=flat" alt="CIEL">
+                        <img src="https://img.shields.io/badge/Termux-000000?style=flat&logo=termux" alt="Termux">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="reveal text-center text-xs font-bold tracking-[0.5em] text-cyan-400 uppercase mb-16">📊 PERFORMANCE</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="reveal glass-card p-4 flex justify-center min-h-[150px]">
+                    <img src="https://github-readme-stats.vercel.app/api?username=fjjjuv&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&border_radius=10" alt="GitHub Stats" class="max-w-full h-auto self-center">
+                </div>
+                <div class="reveal glass-card p-4 flex justify-center min-h-[150px]">
+                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fjjjuv&layout=compact&theme=tokyonight&hide_border=true&border_radius=10" alt="Top Languages" class="max-w-full h-auto self-center">
+                </div>
+                
+                <div class="reveal lg:col-span-2 glass-card p-2 md:p-6 overflow-hidden">
+                    <div class="w-full flex justify-center items-center bg-[#0d1117] rounded-xl border border-white/5">
+                        <img src="https://raw.githubusercontent.com/fjjjuv/fjjjuv/output/github-contribution-grid-snake-dark.svg" 
+                             alt="Snake animation" 
+                             class="w-full h-auto min-h-[250px] md:min-h-[400px] object-contain image-render-pixel">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-24 text-center px-6 border-t border-white/5">
+        <div class="reveal max-w-4xl mx-auto">
+            <h3 class="text-6xl md:text-8xl font-black uppercase mb-12 tracking-tighter opacity-10">LCS STUDIOS</h3>
+            <div class="flex flex-wrap justify-center gap-6 mb-16">
+                <a href="mailto:fjjjuv@proton.me" class="bg-white/5 border border-white/10 px-8 py-3 rounded-xl flex items-center gap-3 hover:border-cyan-400 transition-all">
+                    <i class="fas fa-envelope text-cyan-400"></i>
+                    <span class="text-xs font-bold">fjjjuv@proton.me</span>
+                </a>
+            </div>
+            <p class="text-[9px] font-bold uppercase tracking-[0.4em] opacity-30 italic">Build with passion by Julien • 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialisation après chargement complet
+        window.addEventListener('load', () => {
+            // Calcul de l'âge
+            const birthDate = new Date("2009-08-23");
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+            const ageEl = document.getElementById('age');
+            if(ageEl) ageEl.innerText = age;
+
+            // Barre de progression
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progress-bar").style.width = scrolled + "%";
+            });
+
+            // Observer pour les révélations
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
