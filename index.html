@@ -359,6 +359,9 @@
         }
     </style>
 
+    <script data-goatcounter="https://fjjjuv.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
 </head>
 
 
@@ -553,43 +556,7 @@ class="w-full">
 
 
 
-<!-- COMPTEUR VISITEUR -->
-
-<section class="py-10 px-6">
-
-
-<div class="max-w-md mx-auto">
-
-
-<div class="glass-card p-6 text-center reveal">
-
-
-<i class="fas fa-users text-cyan-400 text-3xl"></i>
-
-
-<h3 class="mt-4 text-xs uppercase tracking-widest text-slate-400">
-
-Visitor System
-
-</h3>
-
-
-<p id="visitor-status"
-
-class="mt-3 text-xl font-black text-white">
-
-Chargement...
-
-</p>
-
-
-</div>
-
-
-</div>
-
-
-</section>
+<!-- COMPTEUR VISITEUR (GoatCounter intégré en head) -->
 <footer class="py-24 text-center px-6 relative overflow-hidden">
 
 
@@ -827,155 +794,83 @@ observer.observe(element);
 /* ===============================
    SYSTEME VISITEURS
 ================================ */
+// Remplacé par GoatCounter (intégré en head)
 
 
-const visitorBox=
-document.getElementById("visitor-status");
 
+// let visitorId=
+// localStorage.getItem("lcs_visitor_id");
 
 
-if(visitorBox){
 
+// let firstVisit=false;
 
 
-let visitorId=
-localStorage.getItem("lcs_visitor_id");
 
+// if(!visitorId){
 
 
-let firstVisit=false;
+// visitorId=
+// "visitor_"+
+// Date.now()+
+// "_"+
+// Math.random()
+// .toString(36)
+// .substring(2);
 
 
 
-if(!visitorId){
+// localStorage.setItem(
+// "lcs_visitor_id",
+// visitorId
+// );
 
 
-visitorId=
-"visitor_"+
-Date.now()+
-"_"+
-Math.random()
-.toString(36)
-.substring(2);
+// firstVisit=true;
 
 
 
-localStorage.setItem(
-"lcs_visitor_id",
-visitorId
-);
 
 
-firstVisit=true;
+// const databaseURL=
+// "https://lcs-visitors-default-rtdb.europe-west1.firebasedatabase.app";
 
 
-}
+// async function updateVisitors(){
 
 
+// try{
 
 
+// const response=
+// await fetch(
+// databaseURL+
+// "/visitors.json"
+// );
 
-const databaseURL=
-"https://lcs-visitors-default-rtdb.europe-west1.firebasedatabase.app";
 
 
-async function updateVisitors(){
+// let visitors=
+// await response.json();
 
 
-try{
 
+// if(!visitors){
+// 
+// visitors={};
+// 
+// }
 
-const response=
-await fetch(
-databaseURL+
-"/visitors.json"
-);
 
 
 
-let visitors=
-await response.json();
 
+// Code Firebase supprim� (remplac� par GoatCounter)
 
 
-if(!visitors){
+// updateVisitors();
 
-visitors={};
-
-}
-
-
-
-visitors[visitorId]={
-
-lastVisit:new Date().toISOString()
-
-};
-
-
-
-await fetch(
-databaseURL+
-"/visitors.json",
-{
-
-method:"PUT",
-
-headers:{
-
-"Content-Type":"application/json"
-
-},
-
-body:
-JSON.stringify(visitors)
-
-}
-
-);
-
-
-
-const count=
-Object.keys(visitors).length;
-
-
-
-visitorBox.innerHTML=
-
-count+
-" visiteur"+
-(count>1?"s":"")+
-" unique"+
-"<br><span class='text-sm text-cyan-400'>enregistré(s)</span>";
-
-
-
-}
-
-catch(error){
-
-
-visitorBox.textContent=
-"Compteur indisponible";
-
-
-console.error(error);
-
-
-}
-
-
-
-}
-
-
-
-updateVisitors();
-
-
-
-}
+// }
 
 
 });
