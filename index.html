@@ -1,296 +1,990 @@
 <!DOCTYPE html>
 <html lang="fr" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>LCS Studios | Julien - Full Stack Developer</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=Fira+Code:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         
-        :root {
-            --cyan: #00D1FF;
-            --bg: #050505;
-            --card: rgba(15, 15, 15, 0.8);
-            --border: rgba(0, 209, 255, 0.15);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-
+        
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
             color: #ffffff;
-            overflow-x: hidden;
-            min-height: 100vh;
+            line-height: 1.6;
         }
-
-        /* Effet de souris */
-        .cursor-glow {
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .skill-tag {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7);
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: #ffffff;
+        }
+        
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            margin-bottom: 16px;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible,
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .project-image {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .project-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .modal {
+            display: none;
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 209, 255, 0.08) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .modal-close:hover {
+            color: #667eea;
+        }
+        
+        .demo-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .demo-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px;
+            color: white;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+        
+        .demo-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .todo-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .todo-item.completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+        
+        #particle-canvas {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background: #0a0a0a;
+        }
+        
+        #game-canvas {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            background: #0a0a0a;
+        }
+        
+        .snake-cell {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            border-radius: 4px;
+        }
+        
+        .snake-head {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .snake-body {
+            background: rgba(102, 126, 234, 0.6);
+        }
+        
+        .snake-food {
+            background: #00ff88;
             border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-            transition: width 0.3s, height 0.3s;
+            animation: pulse 0.5s ease-in-out infinite;
         }
-
-        .grid-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: radial-gradient(circle at 1px 1px, rgba(0, 209, 255, 0.05) 1px, transparent 0);
-            background-size: 40px 40px;
-            z-index: -1;
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
         }
-
-        #progress-bar {
-            position: fixed;
-            top: 0; left: 0; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--cyan));
-            z-index: 10000;
-            width: 0%;
-            box-shadow: 0 0 10px var(--cyan);
+        
+        .chart-bar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px 4px 0 0;
+            transition: height 0.5s ease;
         }
-
+        
+        .code-editor {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+        
+        .code-keyword { color: #569cd6; }
+        .code-string { color: #ce9178; }
+        .code-function { color: #dcdcaa; }
+        .code-comment { color: #6a9955; }
+        .code-number { color: #b5cea8; }
+        
+        /* Compatibility with existing classes */
         .glass-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            backdrop-filter: blur(12px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
-
+        
         .glass-card:hover {
-            border-color: var(--cyan);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 209, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateY(-4px);
         }
-
+        
         .reveal {
             opacity: 0;
-            transform: translateY(30px);
-            transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(20px);
+            transition: all 0.6s ease;
         }
-
+        
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
         }
-
+        
+        /* Also make reveal work with fade-in class */
+        .fade-in.visible,
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
         .badge {
-            background: rgba(0, 209, 255, 0.05);
-            color: var(--cyan);
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
             padding: 6px 14px;
-            border-radius: 10px;
+            border-radius: 6px;
             font-size: 11px;
             font-weight: 700;
-            border: 1px solid rgba(0, 209, 255, 0.1);
-            transition: 0.3s;
+            border: 1px solid rgba(102, 126, 234, 0.2);
         }
-
+        
         .badge:hover {
-            background: rgba(0, 209, 255, 0.2);
+            background: rgba(102, 126, 234, 0.2);
             transform: scale(1.05);
         }
-
-        .image-render-pixel {
-            image-rendering: pixelated;
+        
+        .float-anim {
+            animation: float 4s ease-in-out infinite;
         }
-
-        /* Animation flottante */
+        
         @keyframes float {
-            0% { transform: translateY(0px); }
+            0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
         }
-        .float-anim { animation: float 4s ease-in-out infinite; }
+        
+        /* Override cyan colors with purple theme */
+        .text-cyan-400, .text-cyan-500 {
+            color: #667eea !important;
+        }
+        
+        .bg-cyan-500 {
+            background: #667eea !important;
+        }
+        
+        .border-cyan-400, .border-cyan-500 {
+            border-color: #667eea !important;
+        }
+        
+        .hover\:text-cyan-400:hover {
+            color: #667eea !important;
+        }
+        
+        .hover\:border-cyan-400:hover {
+            border-color: #667eea !important;
+        }
     </style>
+
 </head>
+
+
 <body>
 
-    <div id="progress-bar"></div>
-    <div class="cursor-glow" id="glow"></div>
-    <div class="grid-bg"></div>
 
-    <nav class="fixed top-0 w-full z-[100] p-4">
-        <div class="max-w-6xl mx-auto glass-card px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-cyan-500 rounded-lg flex items-center justify-center font-black text-black shadow-[0_0_15px_rgba(0,209,255,0.5)]">L</div>
-                <div class="flex flex-col">
-                    <span class="font-black text-xs tracking-tight uppercase">LCS STUDIOS</span>
-                    <span class="text-[8px] text-cyan-400 font-bold tracking-widest">DIRECTEUR EXÉCUTIF</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-6">
-                <a href="https://github.com/fjjjuv" target="_blank" class="text-slate-400 hover:text-cyan-400 text-xl transition-all hover:rotate-12">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
+
+
+
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-lg border-b border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-xl font-semibold">LCS Studios</a>
+        <div class="flex items-center gap-8">
+            <a href="#profil" class="nav-link text-sm">Profil</a>
+            <a href="https://github.com/fjjjuv" target="_blank" class="nav-link text-sm">GitHub</a>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <section class="min-h-screen flex flex-col justify-center items-center px-6 text-center relative">
-        <div class="reveal mb-8 float-anim">
-            <img src="https://readme-typing-svg.herokuapp.com?font=Inter&weight=800&size=50&pause=1000&color=00D1FF&center=true&vCenter=true&width=600&height=100&lines=JULIEN+(fjjjuv);FULL+STACK+DEV;LCS+STUDIOS" alt="JULIEN" class="mx-auto">
+
+
+
+<section class="min-h-screen flex items-center justify-center px-6 pt-20">
+    <div class="max-w-4xl mx-auto text-center fade-in">
+        <p class="text-sm text-gray-400 mb-4 tracking-wider uppercase">Full Stack Developer</p>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+            Bonjour, je suis <span class="gradient-text">Julien</span>
+        </h1>
+        <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+            Développeur Full Stack et explorateur tech de 
+            <span class="age text-purple-400 font-bold">--</span> ans.
+        </p>
+        <div class="flex gap-4 justify-center mb-8">
+            <span class="skill-tag">Full Stack</span>
+            <span class="skill-tag">Bac-Pro CIEL</span>
+            <span class="skill-tag">Autodidacte</span>
         </div>
-
-        <div class="reveal flex flex-wrap justify-center gap-3 mb-12">
-            <span class="badge"><i class="fas fa-code mr-2"></i>Full Stack</span>
-            <span class="badge"><i class="fas fa-graduation-cap mr-2"></i>Bac-Pro CIEL</span>
-            <span class="badge"><i class="fas fa-user-ninja mr-2"></i>Autodidacte</span>
+        <div class="flex gap-4 justify-center">
+            <a href="#profil" class="btn-primary text-white">Explorer le Profil</a>
+            <a href="mailto:fjjjuv@proton.me" class="btn-secondary text-white">Me contacter</a>
         </div>
-
-        <div class="reveal flex flex-col sm:flex-row gap-6">
-            <a href="#profil" class="bg-cyan-500 text-black px-10 py-4 rounded-xl font-black uppercase text-xs tracking-[0.2em] hover:bg-cyan-400 hover:shadow-[0_0_20px_rgba(0,209,255,0.4)] transition-all">
-                Explorer le Profil
-            </a>
-            <a href="mailto:fjjjuv@proton.me" class="glass-card px-10 py-4 rounded-xl font-bold uppercase text-[10px] tracking-[0.2em] hover:bg-white/5 transition-all">
-                Me contacter
-            </a>
-        </div>
-    </section>
-
-    <section id="profil" class="py-24 px-6 relative">
-        <div class="max-w-5xl mx-auto">
-            <div class="glass-card p-8 md:p-12 flex flex-col md:flex-row gap-12 items-center reveal">
-                <div class="flex-1">
-                    <h2 class="text-3xl font-black uppercase mb-8 flex items-center gap-4">
-                        <span class="w-12 h-1 bg-cyan-500 rounded-full"></span> 👤 PROFIL_LOG
-                    </h2>
-                    <p class="text-slate-400 leading-relaxed text-base mb-8">
-                        Développeur Full Stack et explorateur tech de <span id="age" class="text-cyan-400 font-bold text-xl px-1">--</span> ans. 
-                        Basé sur une formation en <span class="text-white border-b border-cyan-500/30">Bac-pro CIEL</span>, je me spécialise dans la création d'écosystèmes numériques performants et sécurisés.
-                    </p>
-                    <div class="grid grid-cols-1 gap-5">
-                        <div class="flex items-center gap-4 group cursor-default">
-                            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
-                                <i class="fas fa-bolt text-cyan-400"></i>
-                            </div>
-                            <span class="text-sm font-medium text-slate-300">Architecture & Sécurité</span>
+    </div>
+</section>
+<section id="profil" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="fade-in">
+                <p class="section-title">Profil</p>
+                <h2 class="text-3xl font-bold mb-6">👤 Julien</h2>
+                <p class="text-gray-400 mb-6">
+                    Développeur Full Stack et explorateur tech de 
+                    <span class="age text-purple-400 font-bold">--</span> ans.
+                    Basé sur une formation en Bac-pro CIEL, je me spécialise dans la création d'écosystèmes numériques performants et sécurisés.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                            <i class="fas fa-bolt text-purple-400"></i>
                         </div>
-                        <div class="flex items-center gap-4 group cursor-default">
-                            <div class="w-8 h-8 rounded-lg bg-cyan-500/10 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
-                                <i class="fas fa-microchip text-cyan-400"></i>
-                            </div>
-                            <span class="text-sm font-medium text-slate-300">IA & Automatisation</span>
+                        <span class="text-sm text-gray-300">Architecture & Sécurité</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
+                            <i class="fas fa-microchip text-purple-400"></i>
                         </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-72 shrink-0 relative group">
-                    <div class="absolute -inset-1 bg-cyan-500 rounded-2xl blur opacity-10 group-hover:opacity-30 transition"></div>
-                    <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Coding" class="relative rounded-xl border border-white/10 w-full grayscale hover:grayscale-0 transition-all duration-500">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-24 px-6 bg-gradient-to-b from-transparent via-white/[0.01] to-transparent">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="reveal text-center text-[10px] font-bold tracking-[0.8em] text-cyan-400 uppercase mb-16">SYSTEM_COMPONENTS</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="reveal glass-card p-8">
-                    <div class="text-cyan-500 mb-6 text-2xl"><i class="fas fa-layer-group"></i></div>
-                    <h3 class="font-bold text-xs mb-6 uppercase tracking-widest text-slate-400 border-l-2 border-cyan-500 pl-3">Interface</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <img src="https://img.shields.io/badge/JS-F7DF1E?style=flat&logo=javascript&logoColor=black" alt="JS" class="rounded">
-                        <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black" alt="React" class="rounded">
-                        <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=flat&logo=tailwind-css&logoColor=white" alt="TW" class="rounded">
-                    </div>
-                </div>
-                <div class="reveal glass-card p-8">
-                    <div class="text-cyan-500 mb-6 text-2xl"><i class="fas fa-server"></i></div>
-                    <h3 class="font-bold text-xs mb-6 uppercase tracking-widest text-slate-400 border-l-2 border-cyan-500 pl-3">Infrastructure</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white" alt="Python" class="rounded">
-                        <img src="https://img.shields.io/badge/Node-339933?style=flat&logo=node.js&logoColor=white" alt="Node" class="rounded">
-                        <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white" alt="Docker" class="rounded">
-                    </div>
-                </div>
-                <div class="reveal glass-card p-8">
-                    <div class="text-cyan-500 mb-6 text-2xl"><i class="fas fa-terminal"></i></div>
-                    <h3 class="font-bold text-xs mb-6 uppercase tracking-widest text-slate-400 border-l-2 border-cyan-500 pl-3">Env</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black" alt="Linux" class="rounded">
-                        <img src="https://img.shields.io/badge/Termux-000000?style=flat&logo=termux" alt="Termux" class="rounded">
+                        <span class="text-sm text-gray-300">IA & Automatisation</span>
                     </div>
                 </div>
             </div>
+            <div class="fade-in">
+                <img src="https://media.giphy.com/media/L1R1tvI9svkIWwpVYr/giphy.gif" alt="Coding" class="rounded-xl border border-white/10 w-full">
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="py-24 px-6">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <div class="reveal glass-card p-6 flex justify-center">
-                    <img src="https://github-readme-stats.vercel.app/api?username=fjjjuv&show_icons=true&theme=tokyonight&hide_border=true&count_private=true&border_radius=10" alt="GitHub Stats" class="w-full">
+
+
+
+
+<section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <p class="section-title">Compétences</p>
+            <h2 class="text-3xl font-bold">SYSTEM_COMPONENTS</h2>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="card p-8 text-center fade-in">
+                <div class="text-purple-500 mb-6 text-2xl">
+                    <i class="fas fa-layer-group"></i>
                 </div>
-                <div class="reveal glass-card p-6 flex justify-center">
-                    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fjjjuv&layout=compact&theme=tokyonight&hide_border=true&border_radius=10" alt="Top Languages" class="w-full">
+                <h3 class="font-semibold mb-6">Interface</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <img src="https://img.shields.io/badge/JS-F7DF1E?style=flat&logo=javascript&logoColor=black">
+                    <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black">
+                    <img src="https://img.shields.io/badge/Tailwind-06B6D4?style=flat&logo=tailwind-css&logoColor=white">
                 </div>
-                <div class="reveal lg:col-span-2 glass-card p-4 overflow-hidden">
-                    <div class="bg-[#0d1117] rounded-xl p-4 border border-white/5">
-                        <img src="https://raw.githubusercontent.com/fjjjuv/fjjjuv/output/github-contribution-grid-snake-dark.svg" alt="Snake" class="w-full image-render-pixel">
-                    </div>
+            </div>
+            <div class="card p-8 text-center fade-in">
+                <div class="text-purple-500 mb-6 text-2xl">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3 class="font-semibold mb-6">Infrastructure</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <img src="https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white">
+                    <img src="https://img.shields.io/badge/Node-339933?style=flat&logo=node.js&logoColor=white">
+                    <img src="https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white">
+                </div>
+            </div>
+
+
+
+
+            <div class="card p-8 text-center fade-in">
+                <div class="text-purple-500 mb-6 text-2xl">
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <h3 class="font-semibold mb-6">Env</h3>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <img src="https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black">
+                    <img src="https://img.shields.io/badge/Termux-000000?style=flat&logo=termux">
                 </div>
             </div>
         </div>
-    </section>
-    
-    <footer class="py-24 text-center px-6 relative overflow-hidden">
-        <div class="reveal max-w-4xl mx-auto relative z-10">
-            <h3 class="text-7xl md:text-9xl font-black uppercase mb-12 tracking-tighter opacity-[0.03] select-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">LCS STUDIOS</h3>
-            <div class="flex justify-center mb-12">
-                <a href="mailto:fjjjuv@proton.me" class="glass-card px-8 py-4 flex items-center gap-4 hover:border-cyan-400 group transition-all">
-                    <i class="fas fa-envelope text-cyan-400 group-hover:rotate-12 transition-transform"></i>
-                    <span class="text-xs font-bold tracking-widest uppercase">fjjjuv@proton.me</span>
-                </a>
-            </div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.5em] text-slate-500">Julien &copy; 2026 • LCS Studios</p>
-        </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Calcul de l'âge automatique
-            const updateAge = () => {
-                const birthDate = new Date("2009-08-23");
-                const today = new Date();
-                let age = today.getFullYear() - birthDate.getFullYear();
-                const m = today.getMonth() - birthDate.getMonth();
-                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-                document.getElementById('age').innerText = age;
-            };
-            updateAge();
 
-            // 2. Effet de lueur de souris
-            const glow = document.getElementById('glow');
-            window.addEventListener('mousemove', (e) => {
-                glow.style.left = e.clientX + 'px';
-                glow.style.top = e.clientY + 'px';
-            });
 
-            // 3. Barre de progression de lecture
-            window.addEventListener('scroll', () => {
-                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                const scrolled = (winScroll / height) * 100;
-                document.getElementById("progress-bar").style.width = scrolled + "%";
-            });
 
-            // 4. Animation d'apparition au scroll
-            const observerOptions = { threshold: 0.15 };
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, observerOptions);
 
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        });
-    </script>
+<section class="py-24 px-6">
+
+
+<div class="max-w-6xl mx-auto">
+
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+
+<div class="reveal glass-card p-6">
+
+<img 
+src="https://github-stats-extended.vercel.app/api?username=fjjjuv&show_icons=true&theme=tokyonight&hide_border=true&count_private=true"
+
+class="w-full">
+
+</div>
+
+
+
+
+<div class="reveal glass-card p-6">
+
+
+<img
+
+src="https://github-stats-extended.vercel.app/api/top-langs/?username=fjjjuv&layout=compact&theme=tokyonight&hide_border=true"
+
+class="w-full">
+
+
+</div>
+
+
+
+
+
+<div class="reveal lg:col-span-2 glass-card p-4">
+
+
+<img
+
+src="https://raw.githubusercontent.com/fjjjuv/fjjjuv/output/github-contribution-grid-snake-dark.svg?t=1"
+
+class="w-full">
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- COMPTEUR VISITEUR -->
+
+<section class="py-10 px-6">
+
+
+<div class="max-w-md mx-auto">
+
+
+<div class="glass-card p-6 text-center reveal">
+
+
+<i class="fas fa-users text-cyan-400 text-3xl"></i>
+
+
+<h3 class="mt-4 text-xs uppercase tracking-widest text-slate-400">
+
+Visitor System
+
+</h3>
+
+
+<p id="visitor-status"
+
+class="mt-3 text-xl font-black text-white">
+
+Chargement...
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+<footer class="py-24 text-center px-6 relative overflow-hidden">
+
+
+<div class="reveal max-w-4xl mx-auto relative z-10">
+
+
+<h3 class="
+text-7xl
+md:text-9xl
+font-black
+uppercase
+tracking-tighter
+opacity-[0.03]
+select-none
+absolute
+top-1/2
+left-1/2
+-translate-x-1/2
+-translate-y-1/2
+w-full">
+
+LCS STUDIOS
+
+</h3>
+
+
+
+<div class="flex justify-center mb-12">
+
+
+<a href="mailto:fjjjuv@proton.me"
+
+class="
+glass-card
+px-8
+py-4
+flex
+items-center
+gap-4
+hover:border-cyan-400">
+
+
+<i class="fas fa-envelope text-cyan-400"></i>
+
+
+<span class="text-xs font-bold tracking-widest uppercase">
+
+fjjjuv@proton.me
+
+</span>
+
+
+</a>
+
+
+</div>
+
+
+
+<p class="text-[10px] font-bold uppercase tracking-[0.5em] text-slate-500">
+
+Julien © 2026 • LCS Studios
+
+</p>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+
+
+/* ===============================
+   AGE AUTOMATIQUE
+================================ */
+
+
+const ageElements=document.querySelectorAll(".age");
+
+
+if(ageElements.length){
+
+
+const birthDate=new Date(2009,7,23);
+
+const today=new Date();
+
+
+let age=today.getFullYear()-birthDate.getFullYear();
+
+
+const month=today.getMonth()-birthDate.getMonth();
+
+
+
+if(
+month<0 ||
+(month===0 && today.getDate()<birthDate.getDate())
+){
+
+age--;
+
+}
+
+
+ageElements.forEach(ageEl=>{ ageEl.textContent=age; });
+
+
+}
+
+
+
+
+/* ===============================
+   EFFET SOURIS
+================================ */
+
+
+const glow=document.getElementById("glow");
+
+
+if(glow){
+
+
+window.addEventListener("mousemove",(event)=>{
+
+
+glow.style.left=event.clientX+"px";
+
+glow.style.top=event.clientY+"px";
+
+
+});
+
+
+}
+
+
+
+
+/* ===============================
+   BARRE DE PROGRESSION
+================================ */
+
+
+window.addEventListener("scroll",()=>{
+
+
+const scrollTop=
+document.documentElement.scrollTop ||
+document.body.scrollTop;
+
+
+const height=
+document.documentElement.scrollHeight -
+document.documentElement.clientHeight;
+
+
+
+const progress=
+(scrollTop/height)*100;
+
+
+
+const bar=document.getElementById("progress-bar");
+
+
+if(bar){
+
+bar.style.width=progress+"%";
+
+}
+
+
+});
+
+
+
+
+
+
+/* ===============================
+   ANIMATIONS SCROLL
+================================ */
+
+
+const observer=new IntersectionObserver(
+(entries)=>{
+
+
+entries.forEach(entry=>{
+
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("active");
+
+}
+
+
+});
+
+
+},
+{
+threshold:0.15
+}
+);
+
+
+
+document
+.querySelectorAll(".reveal, .fade-in")
+.forEach(element=>{
+
+observer.observe(element);
+
+});
+
+
+
+
+
+
+/* ===============================
+   SYSTEME VISITEURS
+================================ */
+
+
+const visitorBox=
+document.getElementById("visitor-status");
+
+
+
+if(visitorBox){
+
+
+
+let visitorId=
+localStorage.getItem("lcs_visitor_id");
+
+
+
+let firstVisit=false;
+
+
+
+if(!visitorId){
+
+
+visitorId=
+"visitor_"+
+Date.now()+
+"_"+
+Math.random()
+.toString(36)
+.substring(2);
+
+
+
+localStorage.setItem(
+"lcs_visitor_id",
+visitorId
+);
+
+
+firstVisit=true;
+
+
+}
+
+
+
+
+
+const databaseURL=
+"https://lcs-visitors-default-rtdb.europe-west1.firebasedatabase.app";
+
+
+async function updateVisitors(){
+
+
+try{
+
+
+const response=
+await fetch(
+databaseURL+
+"/visitors.json"
+);
+
+
+
+let visitors=
+await response.json();
+
+
+
+if(!visitors){
+
+visitors={};
+
+}
+
+
+
+visitors[visitorId]={
+
+lastVisit:new Date().toISOString()
+
+};
+
+
+
+await fetch(
+databaseURL+
+"/visitors.json",
+{
+
+method:"PUT",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+body:
+JSON.stringify(visitors)
+
+}
+
+);
+
+
+
+const count=
+Object.keys(visitors).length;
+
+
+
+visitorBox.innerHTML=
+
+count+
+" visiteur"+
+(count>1?"s":"")+
+" unique"+
+"<br><span class='text-sm text-cyan-400'>enregistré(s)</span>";
+
+
+
+}
+
+catch(error){
+
+
+visitorBox.textContent=
+"Compteur indisponible";
+
+
+console.error(error);
+
+
+}
+
+
+
+}
+
+
+
+updateVisitors();
+
+
+
+}
+
+
+});
+
+
+
+</script>
+
+
 </body>
+
 </html>
