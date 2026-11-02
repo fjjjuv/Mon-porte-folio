@@ -115,7 +115,7 @@
         
         .project-image {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            aspect-ratio: 16/9;
+            height: 190px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -358,6 +358,23 @@
         .hover\:border-cyan-400:hover {
             border-color: #667eea !important;
         }
+
+        .lang-btn {
+            cursor: pointer;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            border: 1px solid transparent;
+            background: transparent;
+            transition: all 0.2s ease;
+        }
+        .lang-btn.lang-active {
+            color: #fff;
+            border-color: rgba(102,126,234,0.5);
+            background: rgba(102,126,234,0.15);
+        }
     </style>
 
     <script data-goatcounter="https://fjjjuv.goatcounter.com/count"
@@ -376,9 +393,13 @@
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
         <a href="#" class="text-xl font-semibold">LCS Studios</a>
         <div class="flex items-center gap-8">
-            <a href="#profil" class="nav-link text-sm">Profil</a>
-            <a href="#projets" class="nav-link text-sm">Projets</a>
+            <a href="#profil" class="nav-link text-sm" data-en="Profile">Profil</a>
+            <a href="#projets" class="nav-link text-sm" data-en="Projects">Projets</a>
             <a href="https://github.com/fjjjuv" target="_blank" class="nav-link text-sm">GitHub</a>
+            <div class="flex items-center gap-1">
+                <button class="lang-btn" id="lang-fr" onclick="setLang('fr')">FR</button>
+                <button class="lang-btn" id="lang-en" onclick="setLang('en')">EN</button>
+            </div>
         </div>
     </div>
 </nav>
@@ -389,21 +410,21 @@
 <section class="min-h-screen flex items-center justify-center px-6 pt-20">
     <div class="max-w-4xl mx-auto text-center fade-in">
         <p class="text-sm text-gray-400 mb-4 tracking-wider uppercase">Full Stack Developer</p>
-        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6" data-en="Hi, I&#39;m <span class=&quot;gradient-text&quot;>Julien</span>">
             Bonjour, je suis <span class="gradient-text">Julien</span>
         </h1>
-        <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-            Développeur Full Stack et explorateur tech de 
+        <p class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto" data-en="Full Stack developer and tech explorer, <span class=&quot;age text-purple-400 font-bold&quot;>--</span> years old.">
+            Développeur Full Stack et explorateur tech de
             <span class="age text-purple-400 font-bold">--</span> ans.
         </p>
         <div class="flex gap-4 justify-center mb-8">
             <span class="skill-tag">Full Stack</span>
             <span class="skill-tag">Bac-Pro CIEL</span>
-            <span class="skill-tag">Autodidacte</span>
+            <span class="skill-tag" data-en="Self-taught">Autodidacte</span>
         </div>
         <div class="flex gap-4 justify-center">
-            <a href="#profil" class="btn-primary text-white">Explorer le Profil</a>
-            <a href="mailto:fjjjuv@proton.me" class="btn-secondary text-white">Me contacter</a>
+            <a href="#profil" class="btn-primary text-white" data-en="Explore my profile">Explorer le Profil</a>
+            <a href="mailto:fjjjuv@proton.me" class="btn-secondary text-white" data-en="Contact me">Me contacter</a>
         </div>
     </div>
 </section>
@@ -411,10 +432,10 @@
     <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-2 gap-12 items-center">
             <div class="fade-in">
-                <p class="section-title">Profil</p>
+                <p class="section-title" data-en="Profile">Profil</p>
                 <h2 class="text-3xl font-bold mb-6">👤 Julien</h2>
-                <p class="text-gray-400 mb-6">
-                    Développeur Full Stack et explorateur tech de 
+                <p class="text-gray-400 mb-6" data-en="Full Stack developer and tech explorer, <span class=&quot;age text-purple-400 font-bold&quot;>--</span> years old. Built on a Bac Pro CIEL (IT &amp; electronics) background, I specialize in creating fast, secure digital ecosystems.">
+                    Développeur Full Stack et explorateur tech de
                     <span class="age text-purple-400 font-bold">--</span> ans.
                     Basé sur une formation en Bac-pro CIEL, je me spécialise dans la création d'écosystèmes numériques performants et sécurisés.
                 </p>
@@ -423,13 +444,13 @@
                         <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
                             <i class="fas fa-bolt text-purple-400"></i>
                         </div>
-                        <span class="text-sm text-gray-300">Architecture & Sécurité</span>
+                        <span class="text-sm text-gray-300" data-en="Architecture &amp; Security">Architecture & Sécurité</span>
                     </div>
                     <div class="flex items-center gap-4">
                         <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center">
                             <i class="fas fa-microchip text-purple-400"></i>
                         </div>
-                        <span class="text-sm text-gray-300">IA & Automatisation</span>
+                        <span class="text-sm text-gray-300" data-en="AI &amp; Automation">IA & Automatisation</span>
                     </div>
                 </div>
             </div>
@@ -447,7 +468,7 @@
 <section class="py-24 px-6">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16 fade-in">
-            <p class="section-title">Compétences</p>
+            <p class="section-title" data-en="Skills">Compétences</p>
             <h2 class="text-3xl font-bold">SYSTEM_COMPONENTS</h2>
         </div>
         <div class="grid md:grid-cols-3 gap-8">
@@ -498,8 +519,8 @@
 <section class="py-24 px-6" id="projets">
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-16 fade-in">
-            <p class="section-title">Projets</p>
-            <h2 class="text-3xl font-bold">Mes réalisations</h2>
+            <p class="section-title" data-en="Projects">Projets</p>
+            <h2 class="text-3xl font-bold" data-en="My work">Mes réalisations</h2>
         </div>
         <div class="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
             <div class="card p-8 fade-in">
@@ -507,7 +528,7 @@
                     <i class="fas fa-fire text-6xl text-purple-400"></i>
                 </div>
                 <h3 class="text-2xl font-bold mb-4">prompt-flamegraph</h3>
-                <p class="text-gray-400 mb-6">
+                <p class="text-gray-400 mb-6" data-en="Zero-dependency Python package for profiling LLM prompt tokens. Interactive flamegraphs, waste detection, prompt diffs and HTML/SVG/Markdown/terminal exports.">
                     Package Python sans dépendance pour profiler les tokens des prompts LLM. Flamegraphs interactifs, détection de gaspillage, diff de prompts et exports HTML/SVG/Markdown/terminal.
                 </p>
                 <div class="flex flex-wrap gap-2 mb-6">
@@ -517,7 +538,7 @@
                     <span class="badge">GPL-3.0</span>
                 </div>
                 <div class="flex flex-wrap gap-4">
-                    <a href="https://fjjjuv.github.io/prompt-flamegraph/" target="_blank" class="demo-btn"><i class="fas fa-globe mr-2"></i> Voir le site</a>
+                    <a href="https://fjjjuv.github.io/prompt-flamegraph/" target="_blank" class="demo-btn" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
                     <a href="https://github.com/fjjjuv/prompt-flamegraph" target="_blank" class="btn-secondary text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
                     <a href="https://pypi.org/project/prompt-flamegraph/" target="_blank" class="btn-secondary text-white"><i class="fas fa-box mr-2"></i> PyPI</a>
                     <a href="https://dev.to/fjjjuv/stop-guessing-where-your-llm-prompt-tokens-go-prompt-flamegraph-52nf" target="_blank" class="btn-secondary text-white"><i class="fab fa-dev mr-2"></i> Dev.to</a>
@@ -528,7 +549,7 @@
             <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
                 <i class="fas fa-bug text-purple-400"></i>
             </div>
-            <span>Faille de sécurité signalée : <a href="https://github.com/beeware/briefcase/security/advisories/GHSA-j2qc-j92x-qqhj" target="_blank" class="text-purple-400 hover:underline">BeeWare Briefcase</a> — path traversal · sévérité haute · crédité rapporteur</span>
+            <span data-en="Reported security vulnerability: <a href=&quot;https://github.com/beeware/briefcase/security/advisories/GHSA-j2qc-j92x-qqhj&quot; target=&quot;_blank&quot; class=&quot;text-purple-400 hover:underline&quot;>BeeWare Briefcase</a> — path traversal · high severity · credited reporter">Faille de sécurité signalée : <a href="https://github.com/beeware/briefcase/security/advisories/GHSA-j2qc-j92x-qqhj" target="_blank" class="text-purple-400 hover:underline">BeeWare Briefcase</a> — path traversal · sévérité haute · crédité rapporteur</span>
         </div>
     </div>
 </section>
@@ -923,6 +944,30 @@ observer.observe(element);
 
 
 
+</script>
+
+<script>
+function fillAges(){
+    const birthDate=new Date(2009,7,23),today=new Date();
+    let age=today.getFullYear()-birthDate.getFullYear();
+    const m=today.getMonth()-birthDate.getMonth();
+    if(m<0||(m===0&&today.getDate()<birthDate.getDate()))age--;
+    document.querySelectorAll(".age").forEach(e=>e.textContent=age);
+}
+function setLang(l){
+    document.querySelectorAll("[data-en]").forEach(el=>{
+        if(el.dataset.fr===undefined)el.dataset.fr=el.innerHTML;
+        el.innerHTML=l==="en"?el.dataset.en:el.dataset.fr;
+    });
+    document.documentElement.lang=l;
+    localStorage.setItem("lcs_lang",l);
+    document.getElementById("lang-fr").classList.toggle("lang-active",l==="fr");
+    document.getElementById("lang-en").classList.toggle("lang-active",l==="en");
+    fillAges();
+}
+const savedLang=localStorage.getItem("lcs_lang");
+const navLang=(navigator.language||"fr").toLowerCase();
+setLang(savedLang||(navLang.startsWith("en")?"en":"fr"));
 </script>
 
 
