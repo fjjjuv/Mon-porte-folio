@@ -128,6 +128,10 @@
         .project-image:hover {
             transform: scale(1.02);
         }
+
+        .proj { display: flex; flex-direction: column; height: 100%; }
+        .proj .actions { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; }
+        .demo-btn.sm, .btn-secondary.sm { padding: 8px 16px; font-size: .85rem; }
         
         .modal {
             display: none;
@@ -522,47 +526,101 @@
             <p class="section-title" data-en="Projects">Projets</p>
             <h2 class="text-3xl font-bold" data-en="My work">Mes réalisations</h2>
         </div>
-        <div class="grid md:grid-cols-1 gap-8 max-w-4xl mx-auto">
-            <div class="card p-8 fade-in">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="card proj p-6 fade-in" style="transition-delay:0ms">
                 <div class="project-image" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
                     <i class="fas fa-fire text-6xl text-purple-400"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">prompt-flamegraph</h3>
-                <p class="text-gray-400 mb-6" data-en="Zero-dependency Python package for profiling LLM prompt tokens. Interactive flamegraphs, waste detection, prompt diffs and HTML/SVG/Markdown/terminal exports.">
+                <h3 class="text-xl font-bold mb-1">prompt-flamegraph</h3>
+                <p class="text-xs text-gray-500 mb-3" data-en="LLM prompt profiler">Profileur de prompts LLM</p>
+                <p class="text-gray-400 text-sm mb-5" data-en="Zero-dependency Python package for profiling LLM prompt tokens. Interactive flamegraphs, waste detection, prompt diffs and HTML/SVG/Markdown/terminal exports.">
                     Package Python sans dépendance pour profiler les tokens des prompts LLM. Flamegraphs interactifs, détection de gaspillage, diff de prompts et exports HTML/SVG/Markdown/terminal.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
+                <div class="flex flex-wrap gap-2 mb-5">
                     <span class="badge">Python</span>
                     <span class="badge">LLM</span>
-                    <span class="badge">Token profiling</span>
                     <span class="badge">GPL-3.0</span>
                 </div>
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://fjjjuv.github.io/prompt-flamegraph/" target="_blank" class="demo-btn" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
-                    <a href="https://github.com/fjjjuv/prompt-flamegraph" target="_blank" class="btn-secondary text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
-                    <a href="https://pypi.org/project/prompt-flamegraph/" target="_blank" class="btn-secondary text-white"><i class="fas fa-box mr-2"></i> PyPI</a>
-                    <a href="https://dev.to/fjjjuv/stop-guessing-where-your-llm-prompt-tokens-go-prompt-flamegraph-52nf" target="_blank" class="btn-secondary text-white"><i class="fab fa-dev mr-2"></i> Dev.to</a>
+                <div class="actions">
+                    <a href="https://fjjjuv.github.io/prompt-flamegraph/" target="_blank" class="demo-btn sm" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
+                    <a href="https://github.com/fjjjuv/prompt-flamegraph" target="_blank" class="btn-secondary sm text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
+                    <a href="https://pypi.org/project/prompt-flamegraph/" target="_blank" class="btn-secondary sm text-white"><i class="fas fa-box mr-2"></i> PyPI</a>
+                    <a href="https://dev.to/fjjjuv/stop-guessing-where-your-llm-prompt-tokens-go-prompt-flamegraph-52nf" target="_blank" class="btn-secondary sm text-white"><i class="fab fa-dev mr-2"></i> Dev.to</a>
                 </div>
             </div>
-            <div class="card p-8 fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #0b0d13 0%, #1a1f2e 100%);">
-                    <i class="fas fa-file-pdf text-6xl text-red-400"></i>
+            <div class="card proj p-6 fade-in" style="transition-delay:80ms">
+                <div class="project-image" style="background: linear-gradient(135deg, #14161d 0%, #232838 100%);">
+                    <i class="fas fa-robot text-6xl text-gray-300"></i>
                 </div>
-                <h3 class="text-2xl font-bold mb-4">PDF protocols for AI agents — pdfsp · pdfdtp · pdfad</h3>
-                <p class="text-gray-400 mb-6" data-en="Three open specifications (v1.0, Apache-2.0) that let AI agents edit PDFs reliably: PDFSP (portable JSON scene patches), PDFDTP (transactional editing with certificates and rollback journals) and PDFAD (self-describing PDF manifest). Reference implementation: pdfbadger.">
-                    Trois spécifications ouvertes (v1.0, Apache-2.0) qui permettent aux agents IA d'éditer des PDF de façon fiable : PDFSP (patches JSON portables du graphe de scène), PDFDTP (édition transactionnelle avec certificats et journaux de rollback) et PDFAD (manifeste auto-descriptif embarqué dans le PDF). Implémentation de référence : pdfbadger.
+                <h3 class="text-xl font-bold mb-1">pdfbadger</h3>
+                <p class="text-xs text-gray-500 mb-3" data-en="PDF engine for AI agents">Moteur PDF pour agents IA</p>
+                <p class="text-gray-400 text-sm mb-5" data-en="Reference implementation of the pdfsp, pdfdtp and pdfad protocols: surgical PDF editing engine for AI agents — DOM ops, block-based creation, MCP server with 26 tools.">
+                    Implémentation de référence des protocoles pdfsp, pdfdtp et pdfad : moteur d'édition PDF chirurgical pour agents IA — ops DOM, création par blocs, serveur MCP de 26 outils.
                 </p>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="badge">Open standards</span>
-                    <span class="badge">PDF</span>
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="badge">Python</span>
+                    <span class="badge">MCP</span>
                     <span class="badge">AI agents</span>
+                </div>
+                <div class="actions">
+                    <a href="https://github.com/fjjjuv/pdfbadger" target="_blank" class="demo-btn sm"><i class="fab fa-github mr-2"></i> GitHub</a>
+                </div>
+            </div>
+            <div class="card proj p-6 fade-in" style="transition-delay:160ms">
+                <div class="project-image" style="background: linear-gradient(135deg, #071018 0%, #0e2233 100%);">
+                    <i class="fas fa-code-branch text-6xl text-cyan-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1">pdfsp</h3>
+                <p class="text-xs text-gray-500 mb-3">PDF Scene Patch — specification v1.0</p>
+                <p class="text-gray-400 text-sm mb-5" data-en="Open spec (Apache-2.0): portable, verifiable JSON patches for PDF scene graphs — the JSON Patch (RFC 6902) of PDF, made for AI agents.">
+                    Spec ouverte (Apache-2.0) : patches JSON portables et vérifiables du graphe de scène PDF — l'équivalent de JSON Patch (RFC 6902) pour le PDF, conçu pour les agents IA.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="badge">Spec</span>
+                    <span class="badge">JSON Patch</span>
                     <span class="badge">Apache-2.0</span>
                 </div>
-                <div class="flex flex-wrap gap-4">
-                    <a href="https://fjjjuv.github.io/pdfsp/" target="_blank" class="demo-btn" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> PDFSP site"><i class="fas fa-globe mr-2"></i> Site PDFSP</a>
-                    <a href="https://fjjjuv.github.io/pdfdtp/" target="_blank" class="btn-secondary text-white"><i class="fas fa-globe mr-2"></i> PDFDTP</a>
-                    <a href="https://fjjjuv.github.io/pdfad/" target="_blank" class="btn-secondary text-white"><i class="fas fa-globe mr-2"></i> PDFAD</a>
-                    <a href="https://github.com/fjjjuv/pdfbadger" target="_blank" class="btn-secondary text-white"><i class="fab fa-github mr-2"></i> pdfbadger</a>
+                <div class="actions">
+                    <a href="https://fjjjuv.github.io/pdfsp/" target="_blank" class="demo-btn sm" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
+                    <a href="https://github.com/fjjjuv/pdfsp" target="_blank" class="btn-secondary sm text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
+                </div>
+            </div>
+            <div class="card proj p-6 fade-in" style="transition-delay:240ms">
+                <div class="project-image" style="background: linear-gradient(135deg, #140d0b 0%, #2a1813 100%);">
+                    <i class="fas fa-certificate text-6xl text-orange-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1">pdfdtp</h3>
+                <p class="text-xs text-gray-500 mb-3">Document Transaction Protocol — spec v1.0</p>
+                <p class="text-gray-400 text-sm mb-5" data-en="Open spec (Apache-2.0): transactional PDF editing — engines return certificates proving minimal mutation plus hash-chained rollback journals for audit and undo.">
+                    Spec ouverte (Apache-2.0) : édition PDF transactionnelle — les moteurs retournent des certificats prouvant la mutation minimale et des journaux de rollback chaînés par hash pour audit et undo.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="badge">Spec</span>
+                    <span class="badge">Transactions</span>
+                    <span class="badge">Apache-2.0</span>
+                </div>
+                <div class="actions">
+                    <a href="https://fjjjuv.github.io/pdfdtp/" target="_blank" class="demo-btn sm" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
+                    <a href="https://github.com/fjjjuv/pdfdtp" target="_blank" class="btn-secondary sm text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
+                </div>
+            </div>
+            <div class="card proj p-6 fade-in" style="transition-delay:320ms">
+                <div class="project-image" style="background: linear-gradient(135deg, #131022 0%, #241a3d 100%);">
+                    <i class="fas fa-id-card text-6xl text-violet-400"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1">pdfad</h3>
+                <p class="text-xs text-gray-500 mb-3">PDF Agent Descriptor — spec v1.0</p>
+                <p class="text-gray-400 text-sm mb-5" data-en="Open spec (Apache-2.0): self-describing manifest embedded in a PDF — element index, design DNA, edit journal and engine capabilities, so agents understand documents without re-parsing.">
+                    Spec ouverte (Apache-2.0) : manifeste auto-descriptif embarqué dans le PDF — index des éléments, ADN de design, journal d'édition et capacités du moteur, pour que les agents comprennent le document sans le re-parser.
+                </p>
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="badge">Spec</span>
+                    <span class="badge">Metadata</span>
+                    <span class="badge">Apache-2.0</span>
+                </div>
+                <div class="actions">
+                    <a href="https://fjjjuv.github.io/pdfad/" target="_blank" class="demo-btn sm" data-en="<i class=&quot;fas fa-globe mr-2&quot;></i> View site"><i class="fas fa-globe mr-2"></i> Voir le site</a>
+                    <a href="https://github.com/fjjjuv/pdfad" target="_blank" class="btn-secondary sm text-white"><i class="fab fa-github mr-2"></i> GitHub</a>
                 </div>
             </div>
         </div>
